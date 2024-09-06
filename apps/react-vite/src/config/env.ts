@@ -13,11 +13,11 @@ const createEnv = () => {
     APP_MOCK_API_PORT: z.string().optional().default('8080'),
   });
 
-  const envVars = Object.entries(import.meta.env).reduce<
+  const envVars = Object.entries(process.env).reduce<
     Record<string, string>
   >((acc, curr) => {
     const [key, value] = curr;
-    if (key.startsWith('REACT_APP_')) {
+    if (key.startsWith('REACT_APP_') && value !== undefined) {
       acc[key.replace('REACT_APP_', '')] = value;
     }
     return acc;
@@ -30,8 +30,8 @@ const createEnv = () => {
       `Invalid env provided.
 The following variables are missing or invalid:
 ${Object.entries(parsedEnv.error.flatten().fieldErrors)
-  .map(([k, v]) => `- ${k}: ${v}`)
-  .join('\n')}
+        .map(([k, v]) => `- ${k}: ${v}`)
+        .join('\n')}
 `,
     );
   }

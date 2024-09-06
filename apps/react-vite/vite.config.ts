@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
       'process.env': env,
     },
     base: './',
-    plugins: [react(), viteTsconfigPaths(), EnvironmentPlugin(['REACT_APP_'])],
+    plugins: [react(), viteTsconfigPaths(),   EnvironmentPlugin('all', {prefix: 'REACT_APP_'})],
     server: {
       host: true,
       port: 3000,

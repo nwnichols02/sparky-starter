@@ -9,28 +9,28 @@ import {
 
 import { ProtectedRoute } from '@/lib/auth';
 
-import { AppRoot } from './routes/app/root';
+import { AppRoot } from './pages/app/root';
 
 export const createAppRouter = (queryClient: QueryClient) =>
   createBrowserRouter([
     {
       path: '/',
       lazy: async () => {
-        const { LandingRoute } = await import('./routes/landing');
+        const { LandingRoute } = await import('./pages/landing');
         return { Component: LandingRoute };
       },
     },
     {
       path: '/auth/register',
       lazy: async () => {
-        const { RegisterRoute } = await import('./routes/auth/register');
+        const { RegisterRoute } = await import('./pages/auth/register');
         return { Component: RegisterRoute };
       },
     },
     {
       path: '/auth/login',
       lazy: async () => {
-        const { LoginRoute } = await import('./routes/auth/login');
+        const { LoginRoute } = await import('./pages/auth/login');
         return { Component: LoginRoute };
       },
     },
@@ -46,13 +46,13 @@ export const createAppRouter = (queryClient: QueryClient) =>
           path: 'discussions',
           lazy: async () => {
             const { DiscussionsRoute } = await import(
-              './routes/app/discussions/discussions'
+              './pages/app/discussions/discussions'
             );
             return { Component: DiscussionsRoute };
           },
           loader: async (args: LoaderFunctionArgs) => {
             const { discussionsLoader } = await import(
-              './routes/app/discussions/discussions'
+              './pages/app/discussions/discussions'
             );
             return discussionsLoader(queryClient)(args);
           },
@@ -61,14 +61,14 @@ export const createAppRouter = (queryClient: QueryClient) =>
           path: 'discussions/:discussionId',
           lazy: async () => {
             const { DiscussionRoute } = await import(
-              './routes/app/discussions/discussion'
+              './pages/app/discussions/discussion'
             );
             return { Component: DiscussionRoute };
           },
 
           loader: async (args: LoaderFunctionArgs) => {
             const { discussionLoader } = await import(
-              './routes/app/discussions/discussion'
+              './pages/app/discussions/discussion'
             );
             return discussionLoader(queryClient)(args);
           },
@@ -76,26 +76,26 @@ export const createAppRouter = (queryClient: QueryClient) =>
         {
           path: 'users',
           lazy: async () => {
-            const { UsersRoute } = await import('./routes/app/users');
+            const { UsersRoute } = await import('./pages/app/users');
             return { Component: UsersRoute };
           },
 
           loader: async () => {
-            const { usersLoader } = await import('./routes/app/users');
+            const { usersLoader } = await import('./pages/app/users');
             return usersLoader(queryClient)();
           },
         },
         {
           path: 'profile',
           lazy: async () => {
-            const { ProfileRoute } = await import('./routes/app/profile');
+            const { ProfileRoute } = await import('./pages/app/profile');
             return { Component: ProfileRoute };
           },
         },
         {
           path: '',
           lazy: async () => {
-            const { DashboardRoute } = await import('./routes/app/dashboard');
+            const { DashboardRoute } = await import('./pages/app/dashboard');
             return { Component: DashboardRoute };
           },
         },
@@ -104,7 +104,7 @@ export const createAppRouter = (queryClient: QueryClient) =>
     {
       path: '*',
       lazy: async () => {
-        const { NotFoundRoute } = await import('./routes/not-found');
+        const { NotFoundRoute } = await import('./pages/not-found');
         return { Component: NotFoundRoute };
       },
     },

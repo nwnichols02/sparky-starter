@@ -2,7 +2,7 @@ import { infiniteQueryOptions, useInfiniteQuery } from '@tanstack/react-query';
 
 import { api } from '@/lib/api-client';
 import { QueryConfig } from '@/lib/react-query';
-import { Comment, Meta } from '@/types/api';
+import { Comment, Meta } from '@/interfaces/types/api';
 
 export const getComments = ({
   discussionId,

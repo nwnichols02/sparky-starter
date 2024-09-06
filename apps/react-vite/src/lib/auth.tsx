@@ -3,7 +3,7 @@ import { configureAuth } from 'react-query-auth';
 import { Navigate, useLocation } from 'react-router-dom';
 import { z } from 'zod';
 
-import { AuthResponse, User } from '@/types/api';
+import { AuthResponse, User } from '@/interfaces/types/api';
 
 import { api } from './api-client';
 

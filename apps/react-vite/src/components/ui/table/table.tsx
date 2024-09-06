@@ -1,7 +1,7 @@
 import { ArchiveX } from 'lucide-react';
 import * as React from 'react';
 
-import { BaseEntity } from '@/types/api';
+import { BaseEntity } from '@/interfaces/types/api';
 import { cn } from '@/utils/cn';
 
 import { TablePagination, TablePaginationProps } from './pagination';

@@ -4,7 +4,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Form, Input, Select, Label, Switch } from '@/components/ui/form';
 import { useRegister, registerInputSchema } from '@/lib/auth';
-import { Team } from '@/types/api';
+import { Team } from '@/interfaces/types/api';
 
 type RegisterFormProps = {
   onSuccess: () => void;

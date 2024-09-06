@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Comment, User } from '@/types/api';
+import { Comment, User } from '@/interfaces/types/api';
 
 import { useUser } from './auth';
 

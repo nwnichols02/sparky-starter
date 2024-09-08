@@ -5,6 +5,8 @@ import logoSmall from '../../../public/vitelg.png';
 import { Head } from '@/components/seo';
 // import { Button } from '@/components/ui/button';
 import { useUser } from '@/lib/auth';
+import { GitHub } from '@mui/icons-material';
+import github from "@/assets/github-mark-white.png"
 import {
   AppBar,
   Toolbar,
@@ -18,8 +20,11 @@ import {
   CardActionArea,
   CardHeader,
   CardActions,
-  CardMedia
+  CardMedia,
+  Icon,
 } from '@mui/material';
+import Grid from "@mui/material/Grid2"
+import viteLogo from '@/assets/vite.svg'
 
 export const LandingRoute = () => {
   const navigate = useNavigate();
@@ -33,50 +38,39 @@ export const LandingRoute = () => {
     }
   };
 
-  const HeroSection = styled(Box)(({ theme }) => ({
-    backgroundImage: 'url(https://img.freepik.com/free-photo/digital-art-southwest-landscape_23-2151785541.jpg?t=st=1725664507~exp=1725668107~hmac=7de53b337f79422f2f2fa20def4d60e15b94c9fb21dc9f0512622e15f9df228c&w=1380)',
-    imageResolution: 'from-image',
-    // backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: '100vh',
-    display: 'flex',
-    // flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignContent: 'flex-start',
-    color: 'white',
-    textAlign: 'center',
-  }));
 
   return (
     <>
       <Head description="Welcome to sparky start react" />
-      <HeroSection>
-        <Card sx={{ mb: 26 }}>
-          <CardMedia
-            alt="logo-react"
-            component="img"
-            image={logoSmall}
-            sx={{ height: 160 }}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Sparky Start
-            </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              Showcasing Best Practices For Building Modern Applications
-            </Typography>
-          </CardContent>
-          <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button variant="contained" color="primary" size="small" onClick={handleStart}>
-              Get Started
-            </Button>
-            <Button variant="text" color="inherit" size="small">
-              Learn More
-            </Button>
-          </CardActions>
-        </Card>
-      </HeroSection >
+      <Container maxWidth="sm" sx={{ height: '100vh', display: 'flex', alignContent: 'center' }}>
+        <Grid container sx={{ display: 'flex', alignContent: 'center' }}>
+          <Card>
+            <CardMedia
+              sx={{ height: 140 }}
+              image={viteLogo}
+              title="green iguana"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Sparky Start
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                Showcasing Best Practices For Building Modern Applications
+              </Typography>
+            </CardContent>
+            <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Button variant="contained" color="primary" size="small" onClick={handleStart}>
+                Get Started
+              </Button>
+              <Button variant="text" color="inherit" size="small"
+                startIcon={<GitHub />}
+              >
+                Github
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+      </Container>
     </>
   );
 };

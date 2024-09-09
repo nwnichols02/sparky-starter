@@ -1,27 +1,15 @@
 import { useNavigate } from 'react-router';
-
-import logo from '@/assets/logo.svg';
-import logoSmall from '../../../public/vitelg.png';
 import { Head } from '@/components/seo';
-// import { Button } from '@/components/ui/button';
 import { useUser } from '@/lib/auth';
 import { GitHub } from '@mui/icons-material';
-import github from "@/assets/github-mark-white.png"
 import {
-  AppBar,
-  Toolbar,
   Typography,
   Button,
   Container,
-  Box,
-  styled,
   Card,
   CardContent,
-  CardActionArea,
-  CardHeader,
   CardActions,
   CardMedia,
-  Icon,
 } from '@mui/material';
 import Grid from "@mui/material/Grid2"
 import viteLogo from '@/assets/vite.svg'

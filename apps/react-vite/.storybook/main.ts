@@ -1,5 +1,7 @@
-module.exports = {
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+import type { StorybookConfig } from "@storybook/react-vite";
+
+const config: StorybookConfig = {
+  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
 
   addons: [
     '@storybook/addon-actions',
@@ -9,15 +11,19 @@ module.exports = {
     '@storybook/addon-interactions',
     '@storybook/addon-docs',
     '@storybook/addon-a11y',
+    "@storybook/addon-onboarding",
+    "@storybook/addon-themes",
+    "@storybook/addon-vitest",
+    "@storybook/addon-viewport",
+
   ],
   framework: {
-    name: '@storybook/react-vite',
+    name: "@storybook/react-vite",
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
-  },
   typescript: {
-    reactDocgen: 'react-docgen-typescript',
-  },
+    reactDocgen: "react-docgen"
+  }
 };
+
+export default config;

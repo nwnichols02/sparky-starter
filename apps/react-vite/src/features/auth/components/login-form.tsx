@@ -3,6 +3,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Form, Input } from '@/components/ui/form';
 import { useLogin, loginInputSchema } from '@/lib/auth';
+import { TextField } from '@mui/material';
+import TextBox from '@/components/Molecules/Textbox.component';
 
 type LoginFormProps = {
   onSuccess: () => void;
@@ -25,6 +27,13 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
       >
         {({ register, formState }) => (
           <>
+          <TextBox
+            id="email"
+            label="Email Address"
+            placeholder='Email Address'
+            // error={formState.errors['email']}
+            // registration={register('email')}
+          />
             <Input
               type="email"
               label="Email Address"

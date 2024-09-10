@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthLayout } from '@/components/layouts/auth-layout';
 import { RegisterForm } from '@/features/auth/components/register-form';
 import { useTeams } from '@/features/teams/api/get-teams';
+import { CardContent, Typography } from '@mui/material';
 
 export const RegisterRoute = () => {
   const navigate = useNavigate();
@@ -19,16 +20,22 @@ export const RegisterRoute = () => {
 
   return (
     <AuthLayout title="Register your account">
-      <RegisterForm
-        onSuccess={() =>
-          navigate(`${redirectTo ? `${redirectTo}` : '/app'}`, {
-            replace: true,
-          })
-        }
-        chooseTeam={chooseTeam}
-        setChooseTeam={() => setChooseTeam(!chooseTeam)}
-        teams={teamsQuery.data?.data}
-      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div" sx={{ mb: 4 }}>
+        Register your account
+        </Typography>
+
+        <RegisterForm
+          onSuccess={() =>
+            navigate(`${redirectTo ? `${redirectTo}` : '/app'}`, {
+              replace: true,
+            })
+          }
+          chooseTeam={chooseTeam}
+          setChooseTeam={() => setChooseTeam(!chooseTeam)}
+          teams={teamsQuery.data?.data}
+        />
+      </CardContent>
     </AuthLayout>
   );
 };

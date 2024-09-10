@@ -10,21 +10,18 @@ import {
   updateDiscussionInputSchema,
   useUpdateDiscussion,
 } from '../api/update-discussion';
+import { enqueueSnackbar } from 'notistack';
 
 type UpdateDiscussionProps = {
   discussionId: string;
 };
 
 export const UpdateDiscussion = ({ discussionId }: UpdateDiscussionProps) => {
-  const { addNotification } = useNotifications();
   const discussionQuery = useDiscussion({ discussionId });
   const updateDiscussionMutation = useUpdateDiscussion({
     mutationConfig: {
       onSuccess: () => {
-        addNotification({
-          type: 'success',
-          title: 'Discussion Updated',
-        });
+        enqueueSnackbar({message: 'Discussion Updated', variant: 'success'})
       },
     },
   });

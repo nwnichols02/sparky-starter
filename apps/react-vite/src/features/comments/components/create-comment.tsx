@@ -8,21 +8,18 @@ import {
   useCreateComment,
   createCommentInputSchema,
 } from '../api/create-comment';
+import { enqueueSnackbar } from 'notistack';
 
 type CreateCommentProps = {
   discussionId: string;
 };
 
 export const CreateComment = ({ discussionId }: CreateCommentProps) => {
-  const { addNotification } = useNotifications();
   const createCommentMutation = useCreateComment({
     discussionId,
     mutationConfig: {
       onSuccess: () => {
-        addNotification({
-          type: 'success',
-          title: 'Comment Created',
-        });
+        enqueueSnackbar({message: "Comment Created", variant: 'success'})
       },
     },
   });

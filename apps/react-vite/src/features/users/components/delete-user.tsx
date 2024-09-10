@@ -4,6 +4,7 @@ import { useNotifications } from '@/components/ui/notifications';
 import { useUser } from '@/lib/auth';
 
 import { useDeleteUser } from '../api/delete-user';
+import { enqueueSnackbar } from 'notistack';
 
 type DeleteUserProps = {
   id: string;
@@ -11,14 +12,10 @@ type DeleteUserProps = {
 
 export const DeleteUser = ({ id }: DeleteUserProps) => {
   const user = useUser();
-  const { addNotification } = useNotifications();
   const deleteUserMutation = useDeleteUser({
     mutationConfig: {
       onSuccess: () => {
-        addNotification({
-          type: 'success',
-          title: 'User Deleted',
-        });
+        enqueueSnackbar({message: 'User Deleted', variant: 'success'})
       },
     },
   });

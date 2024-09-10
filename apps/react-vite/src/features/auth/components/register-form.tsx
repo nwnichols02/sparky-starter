@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Form, Input, Select, Label, Switch } from '@/components/ui/form';
 import { useRegister, registerInputSchema } from '@/lib/auth';
 import { Team } from '@/interfaces/types/api';
+import TextBox from '@/components/Molecules/Textbox.component';
+import { Stack } from '@mui/material';
 
 type RegisterFormProps = {
   onSuccess: () => void;
@@ -36,70 +38,56 @@ export const RegisterForm = ({
       >
         {({ register, formState }) => (
           <>
-            <Input
-              type="text"
-              label="First Name"
-              error={formState.errors['firstName']}
-              registration={register('firstName')}
-            />
-            <Input
-              type="text"
-              label="Last Name"
-              error={formState.errors['lastName']}
-              registration={register('lastName')}
-            />
-            <Input
-              type="email"
-              label="Email Address"
-              error={formState.errors['email']}
-              registration={register('email')}
-            />
-            <Input
-              type="password"
-              label="Password"
-              error={formState.errors['password']}
-              registration={register('password')}
-            />
+            <Stack direction='column' sx={{ width: '100%' }}>
 
-            <div className="flex items-center space-x-2">
-              <Switch
-                checked={chooseTeam}
-                onCheckedChange={setChooseTeam}
-                className={`${
-                  chooseTeam ? 'bg-blue-600' : 'bg-gray-200'
-                } relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2`}
-                id="choose-team"
-              />
-              <Label htmlFor="airplane-mode">Join Existing Team</Label>
-            </div>
+              <TextBox name="firstName" label="First Name" id={'firstName'} sx={{ mt: 4 }} />
+              <TextBox name="lastName" label="Last Name" id={'lastName'} sx={{ mt: 4 }} />
+              <TextBox name="email" label="Email Address" id={'email'} sx={{ mt: 4 }} />
+              <TextBox name="password" label="Password" id={'password'} sx={{ mt: 4 }} />
 
-            {chooseTeam && teams ? (
-              <Select
-                label="Team"
-                error={formState.errors['teamId']}
-                registration={register('teamId')}
-                options={teams?.map((team) => ({
-                  label: team.name,
-                  value: team.id,
-                }))}
-              />
-            ) : (
-              <Input
-                type="text"
-                label="Team Name"
-                error={formState.errors['teamName']}
-                registration={register('teamName')}
-              />
-            )}
-            <div>
-              <Button
-                isLoading={registering.isPending}
-                type="submit"
-                className="w-full"
-              >
-                Register
-              </Button>
-            </div>
+              <div className="flex items-center space-x-2">
+                <Switch
+                  checked={chooseTeam}
+                  onCheckedChange={setChooseTeam}
+                  className={`${chooseTeam ? 'bg-blue-600' : 'bg-gray-200'
+                    } relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2`}
+                  id="choose-team"
+                />
+                <Label htmlFor="airplane-mode">Join Existing Team</Label>
+              </div>
+
+              {chooseTeam && teams ? (
+                <Select
+                  label="Team"
+                  error={formState.errors['teamId']}
+                  registration={register('teamId')}
+                  options={teams?.map((team) => ({
+                    label: team.name,
+                    value: team.id,
+                  }))}
+                />
+              ) : (
+                <Input
+                  type="text"
+                  label="Team Name"
+                  error={formState.errors['teamName']}
+                  registration={register('teamName')}
+                />
+              )}
+              <div>
+                <Button
+                  id="register-btn"
+                  // isLoading={registering.isPending}
+                  type="submit"
+                  fullWidth
+                  variant='contained'
+                  className="w-full"
+                >
+                  Register
+                </Button>
+
+              </div>
+            </Stack>
           </>
         )}
       </Form>
@@ -113,6 +101,6 @@ export const RegisterForm = ({
           </Link>
         </div>
       </div>
-    </div>
+    </div >
   );
 };

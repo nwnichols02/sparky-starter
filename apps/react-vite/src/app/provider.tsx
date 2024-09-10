@@ -8,11 +8,12 @@ import { Notifications } from '@/components/ui/notifications';
 import { Spinner } from '@/components/ui/spinner';
 import { AuthLoader } from '@/lib/auth';
 import { queryConfig } from '@/lib/react-query';
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { createTheme, CssBaseline, IconButton, ThemeProvider } from '@mui/material';
 import { createContext, Suspense, useMemo, useState } from 'react';
 import { getThemeByName } from '@/constants/theme/theme';
 import { ThemeConfigurator } from '@/components/Organisms/ThemeConfigurator/ThemeConfigurator.component';
-
+import { closeSnackbar, SnackbarProvider } from 'notistack';
+import { Close } from '@mui/icons-material';
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -56,7 +57,28 @@ export const AppProvider = ({ children }: AppProviderProps) => {
             <HelmetProvider>
               <QueryClientProvider client={queryClient}>
                 {import.meta.env.DEV && <ReactQueryDevtools buttonPosition={'bottom-left'} initialIsOpen={false} />}
-                <Notifications />
+                <SnackbarProvider
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                  }}
+                  dense
+                  maxSnack={3}
+                  autoHideDuration={3000}
+                  action={(snackbarId) => (
+                    <IconButton
+                      size="small"
+                      aria-label="close"
+                      color="inherit"
+                      onClick={() => {
+                        closeSnackbar(snackbarId);
+                      }}
+                      id={'notification'}
+                    >
+                      <Close />
+                    </IconButton>
+                  )}
+                />
                 <AuthLoader
                   renderLoading={() => (
                     <div className="flex h-screen w-screen items-center justify-center">

@@ -3,6 +3,7 @@ import Axios, { InternalAxiosRequestConfig } from 'axios';
 
 import { useNotifications } from '@/components/ui/notifications';
 import { env } from '@/config/env';
+import { enqueueSnackbar } from 'notistack';
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   if (config.headers) {
@@ -24,11 +25,7 @@ api.interceptors.response.use(
   },
   (error) => {
     const message = error.response?.data?.message || error.message;
-    useNotifications.getState().addNotification({
-      type: 'error',
-      title: 'Error',
-      message,
-    });
+    enqueueSnackbar({message: 'Error: ' + message, variant: 'error'})
 
     if (error.response?.status === 401) {
       const searchParams = new URLSearchParams();

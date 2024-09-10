@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Form, Input } from '@/components/ui/form';
 import { useLogin, loginInputSchema } from '@/lib/auth';
-import { TextField } from '@mui/material';
+import { Stack, TextField } from '@mui/material';
 import TextBox from '@/components/Molecules/Textbox.component';
 
 type LoginFormProps = {
@@ -18,7 +18,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const redirectTo = searchParams.get('redirectTo');
 
   return (
-    <div>
+    <>
       <Form
         onSubmit={(values) => {
           login.mutate(values);
@@ -27,47 +27,31 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
       >
         {({ register, formState }) => (
           <>
-          <TextBox
-            id="email"
-            label="Email Address"
-            placeholder='Email Address'
-            // error={formState.errors['email']}
-            // registration={register('email')}
-          />
-            <Input
-              type="email"
-              label="Email Address"
-              error={formState.errors['email']}
-              registration={register('email')}
-            />
-            <Input
-              type="password"
-              label="Password"
-              error={formState.errors['password']}
-              registration={register('password')}
-            />
-            <div>
+            <Stack direction='column' sx={{ width: '100%' }}>
+
+              <TextBox name="email" label="Email Address" type="email" id={'email'} sx={{ mt: 4 }} />
+              <TextBox name="password" label="Password" type="password" id={'password'} sx={{ mt: 4 }} />
               <Button
-                isLoading={login.isPending}
+                id='login-btn'
+                variant="contained"
+                color="primary"
                 type="submit"
-                className="w-full"
+                fullWidth
+                disabled={login.isPending}
+                sx={{mt:4}}
               >
                 Log in
               </Button>
-            </div>
+            </Stack>
           </>
         )}
       </Form>
-      <div className="mt-2 flex items-center justify-end">
-        <div className="text-sm">
-          <Link
-            to={`/auth/register${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`}
-            className="font-medium text-blue-600 hover:text-blue-500"
-          >
-            Register
-          </Link>
-        </div>
-      </div>
-    </div>
+      <Link
+        to={`/auth/register${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`}
+        className="font-medium text-blue-600 hover:text-blue-500"
+      >
+        Register
+      </Link>
+    </>
   );
 };

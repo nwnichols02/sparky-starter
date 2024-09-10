@@ -9,16 +9,13 @@ import {
   createDiscussionInputSchema,
   useCreateDiscussion,
 } from '../api/create-discussion';
+import { enqueueSnackbar } from 'notistack';
 
 export const CreateDiscussion = () => {
-  const { addNotification } = useNotifications();
   const createDiscussionMutation = useCreateDiscussion({
     mutationConfig: {
       onSuccess: () => {
-        addNotification({
-          type: 'success',
-          title: 'Discussion Created',
-        });
+        enqueueSnackbar({message: 'Discussion Created', variant: 'success'})
       },
     },
   });

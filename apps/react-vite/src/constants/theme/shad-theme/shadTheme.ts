@@ -89,6 +89,25 @@ export const shadTheme = (mode: 'light' | 'dark') => {
       MuiCssBaseline: {
         styleOverrides: {
           ':root': {
+            '& .MuiInputLabel-shrink': {
+              transform: 'none',
+            },
+            '& .MuiInputBase-root': {
+              marginTop: '4px',
+              borderRadius: '4px',
+              '&:hover': {
+              },
+            },
+            '& .MuiInputLabel-root': {
+              position: 'relative',
+              transform: 'none',
+              transition: 'none',
+              fontSize: '14px',
+              marginBottom: '4px',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              border: '1px solid #d1d5db',
+            },
             colorScheme: isDarkMode ? 'dark' : 'light',
           },
           html: {

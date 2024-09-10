@@ -6,20 +6,17 @@ import { useNotifications } from '@/components/ui/notifications';
 import { Authorization, ROLES } from '@/lib/authorization';
 
 import { useDeleteDiscussion } from '../api/delete-discussion';
+import { enqueueSnackbar } from 'notistack';
 
 type DeleteDiscussionProps = {
   id: string;
 };
 
 export const DeleteDiscussion = ({ id }: DeleteDiscussionProps) => {
-  const { addNotification } = useNotifications();
   const deleteDiscussionMutation = useDeleteDiscussion({
     mutationConfig: {
       onSuccess: () => {
-        addNotification({
-          type: 'success',
-          title: 'Discussion Deleted',
-        });
+        enqueueSnackbar({message: 'Discussion Deleted', variant: 'success'})
       },
     },
   });

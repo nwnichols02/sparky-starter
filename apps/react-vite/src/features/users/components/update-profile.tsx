@@ -9,17 +9,14 @@ import {
   updateProfileInputSchema,
   useUpdateProfile,
 } from '../api/update-profile';
+import { enqueueSnackbar } from 'notistack';
 
 export const UpdateProfile = () => {
   const user = useUser();
-  const { addNotification } = useNotifications();
   const updateProfileMutation = useUpdateProfile({
     mutationConfig: {
       onSuccess: () => {
-        addNotification({
-          type: 'success',
-          title: 'Profile Updated',
-        });
+        enqueueSnackbar({message: 'Profile Updated', variant: 'success'})
       },
     },
   });

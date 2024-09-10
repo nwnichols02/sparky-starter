@@ -5,6 +5,7 @@ import { ConfirmationDialog } from '@/components/ui/dialog';
 import { useNotifications } from '@/components/ui/notifications';
 
 import { useDeleteComment } from '../api/delete-comment';
+import { enqueueSnackbar } from 'notistack';
 
 type DeleteCommentProps = {
   id: string;
@@ -12,15 +13,11 @@ type DeleteCommentProps = {
 };
 
 export const DeleteComment = ({ id, discussionId }: DeleteCommentProps) => {
-  const { addNotification } = useNotifications();
   const deleteCommentMutation = useDeleteComment({
     discussionId,
     mutationConfig: {
       onSuccess: () => {
-        addNotification({
-          type: 'success',
-          title: 'Comment Deleted',
-        });
+        enqueueSnackbar({message: "Comment Deleted", variant: 'success'})
       },
     },
   });
